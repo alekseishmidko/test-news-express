@@ -3,8 +3,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import authRoutes from "./routes/auth";
-import newsRoutes from "./routes/news";
-import connectDB from "./db";
+import connectDB from "./db/db-connect";
+// import newsRoutes from "./routes/news";
 
 dotenv.config();
 
@@ -21,12 +21,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
     credentials: true,
-    origin: clientUrl,
+    origin: "*",
   })
 );
 
 app.use("/api/auth", authRoutes);
-app.use("/api/news", newsRoutes);
+// app.use("/api/news", newsRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

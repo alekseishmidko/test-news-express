@@ -8,7 +8,7 @@ const EXPIRES_IN = "24h";
 
 router.post("/register", async (req: Request, res: Response) => {
   const { username, email, password } = req.body;
-
+  console.log(req.body);
   try {
     let user = await User.findOne({ email });
 
@@ -40,9 +40,12 @@ router.post("/register", async (req: Request, res: Response) => {
       }
     );
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server error");
+    res.status(500).send(`register:${JSON.stringify(err)}`);
   }
+});
+router.get("/", async (req: Request, res: Response) => {
+  console.log(req.body);
+  res.json("122");
 });
 
 router.post("/login", async (req: Request, res: Response) => {
@@ -77,8 +80,7 @@ router.post("/login", async (req: Request, res: Response) => {
       }
     );
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server error");
+    res.status(500).send(`login:${JSON.stringify(err)}`);
   }
 });
 
